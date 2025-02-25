@@ -4,7 +4,7 @@
   "description": "It is a base repo that will teach the significance of Express JS framework by realising pains of developing a simple ecommerce application in bare metal way.",
   "main": "index.js",
   "scripts": {
-    "start" : "node index.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/MdKasimS/theBicycleShop_noExpress/issues"
   },
-  "homepage": "https://github.com/MdKasimS/theBicycleShop_noExpress#readme"
+  "homepage": "https://github.com/MdKasimS/theBicycleShop_noExpress#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
 }
