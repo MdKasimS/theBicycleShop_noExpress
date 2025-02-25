@@ -12,7 +12,13 @@ receives an incoming HTTP request. The callback function receives
 two arguments: the request object (req) and the response object (res).
 */
 const server = http.createServer((req, res)=>{
+    
     console.log('Server is running');
+    console.log(req.url);
+    console.log(req.headers);
+    console.log(req.statusCode);
+    console.log(req.statusMessage);
+
     res.writeHead(200, {'Content-Type':'text/html'});
     res.end('<h1> Welcome To Bicycle Shop!</h1>');
 });
