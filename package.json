@@ -1,0 +1,25 @@
+{
+  "name": "thebicycleshop",
+  "version": "1.0.0",
+  "description": "It is a base repo that will teach the significance of Express JS framework by realising pains of developing a simple ecommerce application in bare metal way.",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MdKasimS/theBicycleShop_noExpress.git"
+  },
+  "keywords": [
+    "ecommerce",
+    "http",
+    "nodejs"
+  ],
+  "author": "https://github.com/MdKasimS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MdKasimS/theBicycleShop_noExpress/issues"
+  },
+  "homepage": "https://github.com/MdKasimS/theBicycleShop_noExpress#readme"
+}
