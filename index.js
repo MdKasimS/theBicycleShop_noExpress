@@ -4,6 +4,8 @@ When you call http.createServer, you are creating
 an instance of an HTTP server.
 */
 const http = require('http')
+const url = require('url')
+const fs = require('fs').promises
 
 /*
 The createServer method takes a callback function as an argument. 
@@ -11,13 +13,42 @@ This callback function is invoked every time the server
 receives an incoming HTTP request. The callback function receives 
 two arguments: the request object (req) and the response object (res).
 */
-const server = http.createServer((req, res)=>{
+const server = http.createServer(async (req, res)=>{
     
     console.log('Server is running');
     console.log(req.url);
-    console.log(req.headers);
-    console.log(req.statusCode);
-    console.log(req.statusMessage);
+    
+    const myUrl = new URL(req.url, "http://localhost:3000/")
+    console.log(myUrl);
+    console.log(myUrl.searchParams);
+    console.log(myUrl.searchParams.get('id'));
+    console.log(myUrl.searchParams.get('test'));
+
+    let pathname = myUrl.pathname
+    let id = myUrl.searchParams.get('id')
+
+    if(pathname ==="/")
+    {
+        const html = await fs.readFile('./view/bicycles.html', 'utf-8')
+        res.writeHead(200, {'Content-Type':'text/html'});
+        res.end(html)
+    }
+    else if(pathname ==="/bicycle" && id>=0 && id<=5)
+    {
+        const html = await fs.readFile('./view/overview.html', 'utf-8')
+        res.writeHead(200, {'Content-Type':'text/html'});
+        res.end(html)
+    }
+    else
+    {
+        res.writeHead(404, {'Content-Type':'text/html'});
+        res.end('<div> <h1>Product Not Found</h1></div>')
+        return
+    }
+    
+    // console.log(req.headers);
+    // console.log(req.statusCode);
+    // console.log(req.statusMessage);
 
     res.writeHead(200, {'Content-Type':'text/html'});
     res.end('<h1> Welcome To Bicycle Shop!</h1>');
