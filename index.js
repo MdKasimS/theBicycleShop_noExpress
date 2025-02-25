@@ -32,6 +32,7 @@ const server = http.createServer(async (req, res)=>{
         const html = await fs.readFile('./view/bicycles.html', 'utf-8')
         res.writeHead(200, {'Content-Type':'text/html'});
         res.end(html)
+        return
     }
     else if(pathname ==="/bicycle" && id>=0 && id<=5)
     {
