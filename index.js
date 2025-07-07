@@ -7,7 +7,6 @@ const http = require('http')
 const url = require('url')
 const fs = require('fs').promises
 const bicycles = require('./data/data.json')
-// console.log(bicycles)
 
 /*
 The createServer method takes a callback function as an argument. 
@@ -92,7 +91,17 @@ const server = http.createServer(async (req, res)=>{
     }
     else if(pathname ==="/overview")
     {
-        const html = await fs.readFile('./view/bicycles.html', 'utf-8')
+        let html = await fs.readFile('./view/bicycles.html', 'utf-8')
+        const AllMainBicycles = await fs.readFile('./view/main/bmain.html', 'utf-8')
+        
+        let allTheBicycles = ''
+        
+        for(let index =0; index<6; ++index){
+            allTheBicycles += replaceTemplate(AllMainBicycles, bicycles[index])
+        }
+
+        html = html.replace(/<%AllMainBicycles%>/g, allTheBicycles)
+
         res.writeHead(200, {'Content-Type':'text/html'});
         res.end(html)
         return
@@ -102,8 +111,8 @@ const server = http.createServer(async (req, res)=>{
         let html = await fs.readFile('./view/overview.html', 'utf-8')
         
         const bicycle = bicycles.find((b)=> b.id === id)
-        
-        replaceTemplate(html, bicycle)
+
+        html = replaceTemplate(html, bicycle)
 
         res.writeHead(200, {'Content-Type':'text/html'});
         res.end(html)
@@ -172,6 +181,7 @@ function replaceTemplate(html, bicycle)
     html = html.replace(/<%OLDPRICE%>/g, `$${bicycle.originalPrice}`);
     return html
 }
+
 /*
 1. Request (req) Object: The req object represents the incoming HTTP request. 
 It contains details about the request, such as the request 

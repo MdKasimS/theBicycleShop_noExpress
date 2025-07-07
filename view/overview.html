@@ -24,8 +24,10 @@
             <p><%NAME%></p>
           </div>
 
+          <!-- <div class="bicycle__price"> -->
           <div class="singleBicycle_price">
-            <p><%NEWPRICE%></p>
+            <p class="current_price"><%NEWPRICE%></p>
+            <p class="old_price"><%OLDPRICE%></p>
           </div>
 
           <div class="singleBicycle_desc">
@@ -49,7 +51,7 @@
 
         <div class="goBack">
           <!-- A direct link is used unlike for png files -->
-          <a href="/icons">
+          <a href="/overview" class="goBack_link">
             <svg class="icon icon-arrow">
               <use xlink:href="/icons.svg#icon-arrow"></use>
             </svg>
