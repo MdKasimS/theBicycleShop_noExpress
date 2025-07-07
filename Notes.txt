@@ -1,0 +1,1 @@
+Your browser doesn't just request the HTML page — it also parses that HTML and then makes additional requests for any resources referenced in it
