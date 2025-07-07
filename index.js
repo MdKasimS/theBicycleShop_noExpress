@@ -73,7 +73,24 @@ const server = http.createServer(async (req, res)=>{
     let pathname = myUrl.pathname
     let id = myUrl.searchParams.get('id')
 
-    if(pathname ==="/overview")
+    if(pathname ==="/")
+    {
+        let html = await fs.readFile('./view/bicycles.html', 'utf-8')
+        const AllMainBicycles = await fs.readFile('./view/main/bmain.html', 'utf-8')
+        
+        let allTheBicycles = ''
+        
+        for(let index =0; index<6; ++index){
+            allTheBicycles += replaceTemplate(AllMainBicycles, bicycles[index])
+        }
+
+        html = html.replace(/<%AllMainBicycles%>/g, allTheBicycles)
+
+        res.writeHead(200, {'Content-Type':'text/html'});
+        res.end(html)
+        return
+    }
+    else if(pathname ==="/overview")
     {
         const html = await fs.readFile('./view/bicycles.html', 'utf-8')
         res.writeHead(200, {'Content-Type':'text/html'});
@@ -85,19 +102,8 @@ const server = http.createServer(async (req, res)=>{
         let html = await fs.readFile('./view/overview.html', 'utf-8')
         
         const bicycle = bicycles.find((b)=> b.id === id)
-        console.log(bicycle)
-
-        html = html.replace(/<%IMAGE%>/g, bicycle.image)
-        html = html.replace(/<%NAME%>/g, bicycle.name)
-
-        let price = bicycle.originalPrice
-
-        if(bicycle.hasDiscount)
-        {
-            price = (price*(100-bicycle.discount)) / 100;
-        }
-        html = html.replace(/<%NEWPRICE%>/g, `$${price}`);
-
+        
+        replaceTemplate(html, bicycle)
 
         res.writeHead(200, {'Content-Type':'text/html'});
         res.end(html)
@@ -149,6 +155,23 @@ server.listen() starts server in separate thread. The properties of server
 */
 server.listen(3000);
 
+
+function replaceTemplate(html, bicycle)
+{
+    html = html.replace(/<%IMAGE%>/g, bicycle.image)
+    html = html.replace(/<%NAME%>/g, bicycle.name)
+    
+    let price = bicycle.originalPrice
+    
+    if(bicycle.hasDiscount)
+    {
+        price = (price*(100-bicycle.discount)) / 100;
+    }
+    
+    html = html.replace(/<%NEWPRICE%>/g, `$${price}`);
+    html = html.replace(/<%OLDPRICE%>/g, `$${bicycle.originalPrice}`);
+    return html
+}
 /*
 1. Request (req) Object: The req object represents the incoming HTTP request. 
 It contains details about the request, such as the request 
