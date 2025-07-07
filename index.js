@@ -66,7 +66,7 @@ const server = http.createServer(async (req, res)=>{
     console.log(myUrl);
     console.log(myUrl.searchParams);
     console.log(myUrl.searchParams.get('id'));
-    console.log(myUrl.searchParams.get('test'));
+    console.log(req.URL)
 
     let pathname = myUrl.pathname
     let id = myUrl.searchParams.get('id')
@@ -85,6 +85,14 @@ const server = http.createServer(async (req, res)=>{
         res.end(html)
         return
     }
+    else if(/\.(png)$/i.test(req.url))
+    {
+        const image = await fs.readFile(`./public/image/${req.url.slice(1)}`)
+        res.writeHead(200, {'Content-Type':'image/png'});
+        res.end(image)
+        return
+    }
+    
     else
     {
         res.writeHead(404, {'Content-Type':'text/html'});
