@@ -1,76 +1,18 @@
 Server is running
-/bicycle?id=1
-URL {
-  href: 'http://localhost:3000/bicycle?id=1',
-  origin: 'http://localhost:3000',
-  protocol: 'http:',
-  username: '',
-  password: '',
-  host: 'localhost:3000',
-  hostname: 'localhost',
-  port: '3000',
-  pathname: '/bicycle',
-  search: '?id=1',
-  searchParams: URLSearchParams { 'id' => '1' },
-  hash: ''
-}
-URLSearchParams { 'id' => '1' }
+The route requested /bicycle?id=1
+Requested URL : http://localhost:3000/bicycle?id=1
+Search parameteres : id=1
 1
 undefined
 Server is running
-/icons.svg
-URL {
-  href: 'http://localhost:3000/icons.svg',
-  origin: 'http://localhost:3000',
-  protocol: 'http:',
-  username: '',
-  password: '',
-  host: 'localhost:3000',
-  hostname: 'localhost',
-  port: '3000',
-  pathname: '/icons.svg',
-  search: '',
-  searchParams: URLSearchParams {},
-  hash: ''
-}
-URLSearchParams {}
+The route requested /index.css
+Requested URL : http://localhost:3000/index.css
+Search parameteres : 
 null
 undefined
 Server is running
-/index.css
-URL {
-  href: 'http://localhost:3000/index.css',
-  origin: 'http://localhost:3000',
-  protocol: 'http:',
-  username: '',
-  password: '',
-  host: 'localhost:3000',
-  hostname: 'localhost',
-  port: '3000',
-  pathname: '/index.css',
-  search: '',
-  searchParams: URLSearchParams {},
-  hash: ''
-}
-URLSearchParams {}
-null
-undefined
-Server is running
-/0.png
-URL {
-  href: 'http://localhost:3000/0.png',
-  origin: 'http://localhost:3000',
-  protocol: 'http:',
-  username: '',
-  password: '',
-  host: 'localhost:3000',
-  hostname: 'localhost',
-  port: '3000',
-  pathname: '/0.png',
-  search: '',
-  searchParams: URLSearchParams {},
-  hash: ''
-}
-URLSearchParams {}
+The route requested /0.png
+Requested URL : http://localhost:3000/0.png
+Search parameteres : 
 null
 undefined

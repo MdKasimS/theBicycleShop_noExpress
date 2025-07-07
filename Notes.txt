@@ -1,1 +1,32 @@
 Your browser doesn't just request the HTML page — it also parses that HTML and then makes additional requests for any resources referenced in it
+
+Notice the URLs
+
+/*
+if(pathname ==="/overview")
+{
+    const html = await fs.readFile('./view/overview.html', 'utf-8')
+}
+//Actual code is as per required, just note the URl pattern
+Requested URL : http://localhost:3000/overview
+*/
+
+and in
+
+/*
+else if(/\.(png)$/i.test(req.url))
+{
+    const image = await fs.readFile(`./public/image/${req.url.slice(1)}`)
+}
+*/
+
+and compare actual requestedServer is running
+
+The route requested /0.png
+Requested URL : http://localhost:3000/0.png
+Search parameteres : 
+null
+undefined
+
+
+So math the routes in code with URLs in template.
