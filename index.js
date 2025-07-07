@@ -67,7 +67,6 @@ const server = http.createServer(async (req, res)=>{
     console.log(`Requested URL : ${myUrl}`);
     console.log(`Search parameteres : ${myUrl.searchParams}`);
     console.log(myUrl.searchParams.get('id'));
-    console.log(req.URL)
 
     let pathname = myUrl.pathname
     let id = myUrl.searchParams.get('id')
@@ -179,6 +178,22 @@ function replaceTemplate(html, bicycle)
     
     html = html.replace(/<%NEWPRICE%>/g, `$${price}`);
     html = html.replace(/<%OLDPRICE%>/g, `$${bicycle.originalPrice}`);
+
+    if(bicycle.hasDiscount)
+    {
+        html = html.replace(/<%DISCOUNTRATE%>/g, `<div class="discount__rate">
+            <p>${bicycle.discount}% Off</p>
+        </div>`);
+    }
+
+    //TODO: Why do we use /g in replace method? 
+    //TODO: Why this checked is working here
+    for(index = 0; index < bicycle.star; ++index)
+    {
+        html = html.replace(/<%START%>/, `checked`);
+    }
+    html = html.replace(/<%START%>/g, ``);
+
     return html
 }
 
