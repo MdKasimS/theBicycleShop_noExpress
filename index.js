@@ -54,7 +54,7 @@ const server = http.createServer(async (req, res)=>{
     
     baseUrl = "http://localhost:3000/"
     console.log('Server is running');
-    console.log(req.url);
+    console.log(`The route requested ${req.url}`);
     
     /*
     This is how you can parse the URL and get the search parameters
@@ -63,8 +63,8 @@ const server = http.createServer(async (req, res)=>{
     */
     
     const myUrl = new URL(req.url, baseUrl)
-    console.log(myUrl);
-    console.log(myUrl.searchParams);
+    console.log(`Requested URL : ${myUrl}`);
+    console.log(`Search parameteres : ${myUrl.searchParams}`);
     console.log(myUrl.searchParams.get('id'));
     console.log(req.URL)
 
@@ -92,7 +92,20 @@ const server = http.createServer(async (req, res)=>{
         res.end(image)
         return
     }
-    
+    else if(/\.(css)$/i.test(req.url))
+    {
+        const css = await fs.readFile(`./public/css/index.css`)
+        res.writeHead(200, {'Content-Type':'text/css'});
+        res.end(css)
+        return
+    }
+    else if(/\.(svg)$/i.test(req.url))
+    {
+        const svg = await fs.readFile(`./public/image/icons.svg`)
+        res.writeHead(200, {'Content-Type':'image/svg+xml'});
+        res.end(svg)
+        return
+    }
     else
     {
         res.writeHead(404, {'Content-Type':'text/html'});
