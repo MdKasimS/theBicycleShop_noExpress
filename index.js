@@ -9,7 +9,7 @@ app.set("view engine", "ejs")
 app.get("/", (req, res)=>{    
     console.log(req.Url)
     // return res.send(bicycles);
-    return res.render('bicycles');
+    return res.render('overview');
 })
 
 
