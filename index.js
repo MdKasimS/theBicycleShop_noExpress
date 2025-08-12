@@ -4,12 +4,10 @@ const app = express()
 
 const bicycles = require('./data/data.json')
 
-app.get("/", (req, res)=>{
+app.get("/", (req, res)=>{    
     console.log(req.Url)
-
-    return res.send("Assalamualaikum! Bicycles data is loaded");
+    return res.send(bicycles);
 })
-
 
 app.get("/bicycle", (req, res)=>{
     
@@ -18,7 +16,9 @@ app.get("/bicycle", (req, res)=>{
     console.log(req.query.id)
     // console.log(req.query.name)
     
-    return res.send("/bicycle page");
+    const bicycle = bicycles.find(b => b.id === req.query.id)
+
+    return res.send(bicycle);
 })
 
 app.listen(3000, ()=>{
