@@ -51,107 +51,107 @@ and it is processing these events in the order they are received in the event lo
 
 
 */
-const server = http.createServer(async (req, res)=>{
+// const server = http.createServer(async (req, res)=>{
     
-    baseUrl = "http://localhost:3000/"
-    console.log('Server is running');
-    console.log(`The route requested ${req.url}`);
+//     baseUrl = "http://localhost:3000/"
+//     console.log('Server is running');
+//     console.log(`The route requested ${req.url}`);
     
-    /*
-    This is how you can parse the URL and get the search parameters
-    The URL constructor is used to parse the URL and create a URL object.
-    The URL object has a searchParams property that contains the search parameters.   
-    */
+//     /*
+//     This is how you can parse the URL and get the search parameters
+//     The URL constructor is used to parse the URL and create a URL object.
+//     The URL object has a searchParams property that contains the search parameters.   
+//     */
     
-    const myUrl = new URL(req.url, baseUrl)
-    console.log(`Requested URL : ${myUrl}`);
-    console.log(`Search parameteres : ${myUrl.searchParams}`);
-    console.log(myUrl.searchParams.get('id'));
+//     const myUrl = new URL(req.url, baseUrl)
+//     console.log(`Requested URL : ${myUrl}`);
+//     console.log(`Search parameteres : ${myUrl.searchParams}`);
+//     console.log(myUrl.searchParams.get('id'));
 
-    let pathname = myUrl.pathname
-    let id = myUrl.searchParams.get('id')
+//     let pathname = myUrl.pathname
+//     let id = myUrl.searchParams.get('id')
 
-    if(pathname ==="/")
-    {
-        let html = await fs.readFile('./view/bicycles.html', 'utf-8')
-        const AllMainBicycles = await fs.readFile('./view/main/bmain.html', 'utf-8')
+//     if(pathname ==="/")
+//     {
+//         let html = await fs.readFile('./view/bicycles.html', 'utf-8')
+//         const AllMainBicycles = await fs.readFile('./view/main/bmain.html', 'utf-8')
         
-        let allTheBicycles = ''
+//         let allTheBicycles = ''
         
-        for(let index =0; index<6; ++index){
-            allTheBicycles += replaceTemplate(AllMainBicycles, bicycles[index])
-        }
+//         for(let index =0; index<6; ++index){
+//             allTheBicycles += replaceTemplate(AllMainBicycles, bicycles[index])
+//         }
 
-        html = html.replace(/<%AllMainBicycles%>/g, allTheBicycles)
+//         html = html.replace(/<%AllMainBicycles%>/g, allTheBicycles)
 
-        res.writeHead(200, {'Content-Type':'text/html'});
-        res.end(html)
-        return
-    }
-    else if(pathname ==="/overview")
-    {
-        let html = await fs.readFile('./view/bicycles.html', 'utf-8')
-        const AllMainBicycles = await fs.readFile('./view/main/bmain.html', 'utf-8')
+//         res.writeHead(200, {'Content-Type':'text/html'});
+//         res.end(html)
+//         return
+//     }
+//     else if(pathname ==="/overview")
+//     {
+//         let html = await fs.readFile('./view/bicycles.html', 'utf-8')
+//         const AllMainBicycles = await fs.readFile('./view/main/bmain.html', 'utf-8')
         
-        let allTheBicycles = ''
+//         let allTheBicycles = ''
         
-        for(let index =0; index<6; ++index){
-            allTheBicycles += replaceTemplate(AllMainBicycles, bicycles[index])
-        }
+//         for(let index =0; index<6; ++index){
+//             allTheBicycles += replaceTemplate(AllMainBicycles, bicycles[index])
+//         }
 
-        html = html.replace(/<%AllMainBicycles%>/g, allTheBicycles)
+//         html = html.replace(/<%AllMainBicycles%>/g, allTheBicycles)
 
-        res.writeHead(200, {'Content-Type':'text/html'});
-        res.end(html)
-        return
-    }
-    else if(pathname ==="/bicycle" && id>=0 && id<=5)
-    {
-        let html = await fs.readFile('./view/overview.html', 'utf-8')
+//         res.writeHead(200, {'Content-Type':'text/html'});
+//         res.end(html)
+//         return
+//     }
+//     else if(pathname ==="/bicycle" && id>=0 && id<=5)
+//     {
+//         let html = await fs.readFile('./view/overview.html', 'utf-8')
         
-        const bicycle = bicycles.find((b)=> b.id === id)
+//         const bicycle = bicycles.find((b)=> b.id === id)
 
-        html = replaceTemplate(html, bicycle)
+//         html = replaceTemplate(html, bicycle)
 
-        res.writeHead(200, {'Content-Type':'text/html'});
-        res.end(html)
-        return
-    }
-    else if(/\.(png)$/i.test(req.url))
-    {
-        const image = await fs.readFile(`./public/image/${req.url.slice(1)}`)
-        res.writeHead(200, {'Content-Type':'image/png'});
-        res.end(image)
-        return
-    }
-    else if(/\.(css)$/i.test(req.url))
-    {
-        const css = await fs.readFile(`./public/css/index.css`)
-        res.writeHead(200, {'Content-Type':'text/css'});
-        res.end(css)
-        return
-    }
-    else if(/\.(svg)$/i.test(req.url))
-    {
-        const svg = await fs.readFile(`./public/image/icons.svg`)
-        res.writeHead(200, {'Content-Type':'image/svg+xml'});
-        res.end(svg)
-        return
-    }
-    else
-    {
-        res.writeHead(404, {'Content-Type':'text/html'});
-        res.end('<div> <h1>Page Not Found</h1></div>')
-        return
-    }
+//         res.writeHead(200, {'Content-Type':'text/html'});
+//         res.end(html)
+//         return
+//     }
+//     else if(/\.(png)$/i.test(req.url))
+//     {
+//         const image = await fs.readFile(`./public/image/${req.url.slice(1)}`)
+//         res.writeHead(200, {'Content-Type':'image/png'});
+//         res.end(image)
+//         return
+//     }
+//     else if(/\.(css)$/i.test(req.url))
+//     {
+//         const css = await fs.readFile(`./public/css/index.css`)
+//         res.writeHead(200, {'Content-Type':'text/css'});
+//         res.end(css)
+//         return
+//     }
+//     else if(/\.(svg)$/i.test(req.url))
+//     {
+//         const svg = await fs.readFile(`./public/image/icons.svg`)
+//         res.writeHead(200, {'Content-Type':'image/svg+xml'});
+//         res.end(svg)
+//         return
+//     }
+//     else
+//     {
+//         res.writeHead(404, {'Content-Type':'text/html'});
+//         res.end('<div> <h1>Page Not Found</h1></div>')
+//         return
+//     }
     
-    // console.log(req.headers);
-    // console.log(req.statusCode);
-    // console.log(req.statusMessage);
+//     // console.log(req.headers);
+//     // console.log(req.statusCode);
+//     // console.log(req.statusMessage);
 
-    // res.writeHead(200, {'Content-Type':'text/html'});
-    // res.end('<h1> Welcome To Bicycle Shop!</h1>');
-});
+//     // res.writeHead(200, {'Content-Type':'text/html'});
+//     // res.end('<h1> Welcome To Bicycle Shop!</h1>');
+// });
 
 /*
 Note: It is setting up a req-res pipeline that we saw in DotNet.
@@ -161,7 +161,7 @@ server.listen() starts server in separate thread. The properties of server
  it is received by server(or say diverted to this separately running server 
  object thread)
 */
-server.listen(3000);
+// server.listen(3000);
 
 
 function replaceTemplate(html, bicycle)
