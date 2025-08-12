@@ -1,18 +1,23 @@
 
 const express = require('express')
-
 const app = express()
 
+const bicycles = require('./data/data.json')
+
 app.get("/", (req, res)=>{
-    console.log(req.baseUrl)
-    return res.send("Assalamualaikum");
+    console.log(req.Url)
+
+    return res.send("Assalamualaikum! Bicycles data is loaded");
 })
 
 
 app.get("/bicycle", (req, res)=>{
+    
+    // console.log(req.url)
+    
     console.log(req.query.id)
     // console.log(req.query.name)
-    console.log(req.url)
+    
     return res.send("/bicycle page");
 })
 
