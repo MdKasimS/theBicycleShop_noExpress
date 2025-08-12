@@ -1,1 +1,14 @@
-console.log("Alhamdulillah Started With Express!")
+
+const express = require('express')
+
+const app = express()
+
+app.get("/", (req, res)=>{
+    console.log(req.baseUrl)
+    return res.send("Assalamualaikum");
+})
+
+app.listen(3000, ()=>{
+    console.log("Alhamdulillah Started With Express @3000") 
+
+})
